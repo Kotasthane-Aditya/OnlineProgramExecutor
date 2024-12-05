@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="ISO-8859-1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>API Documentation</title>
+	<style>
+		body {
+            font-family: Arial, sans-serif;
+        }
+        pre, code {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        h3 {
+            color: #333;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .highlight {
+            color: green;
+            font-weight: bold;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        .form-container table {
+            width: 100%;
+        }
+        .form-container td {
+            padding: 10px;
+        }
+        .form-container textarea {
+            width: 100%;
+        }
+        iframe {
+            border: 1px solid #ddd;
+        }
+	</style>
+</head>
+<body>
+<center>
+	<p style="color: green;">
+		API Status: <b>Ready!</b>
+	</p>
+</center>
+<div class="section">
+	<h3>1. Source Code Execution</h3>
+	<p class="highlight">POST application/json</p>
+	<p>/WebBasedProgamExecutor/ExecutorServiceSource</p>
+	<hr>
+	<h4>JAVA</h4>
+	<pre>
+{
+    "languageType": "JAVA",
+    "input": "public class Application {\r\n\r\npublic static void main(String args[]) {\r\nSystem.out.println(\"hello world!\");\r\n}\r\n}",
+    "class": "Application"
+}
+        </pre>
+	<h4>Python</h4>
+	<pre>
+{
+    "languageType": "PYTHON",
+    "input": "print(\"hello world!\");"
+}
+        </pre>
+</div>
+<div class="section">
+	<h3>2. Source File Execution</h3>
+	<p class="highlight">POST multipart/form-data</p>
+	<p>/WebBasedProgamExecutor/ExecutorServiceFile</p>
+	<hr>
+	<h4>JAVA</h4>
+	<pre>
+sourceFile: FILE
+{
+    "requestData": {
+        "languageType": "JAVA"
+    }
+}
+        </pre>
+	<h4>Python</h4>
+	<pre>
+sourceFile: FILE
+{
+    "requestData": {
+        "languageType": "PYTHON"
+    }
+}
+        </pre>
+</div>
+<div class="section form-container">
+	<h3>Example Form</h3>
+	<form method="POST" action="http://localhost:8080/sourceFileExecutor" enctype="multipart/form-data" target="output">
+		<table>
+			<tr>
+				<td>sourceFile:</td>
+				<td><input type="file" name="sourceFile" /></td>
+			</tr>
+			<tr>
+				<td>requestData:</td>
+				<td><textarea rows="10" name="requestData" placeholder="JSON Data"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Submit" /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div class="section">
+	<h3>Output:</h3>
+	<iframe width="500" height="200" name="output">
+		<p>Your browser does not support iframes.</p>
+	</iframe>
+</div>
+</body>
+</html>
